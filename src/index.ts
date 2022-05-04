@@ -1,49 +1,42 @@
-import * as crypto from "crypto";
-
-interface BlockShape {
-    hash: string;
-    prevHash: string;
-    height: number;
-    data: string;
+//TYPE VS INTEFACE
+type PositionType = {
+    x: number;
+    y: number;
 }
 
-class Block implements BlockShape {
-    public hash: string;
-    constructor(
-        public prevHash: string,
-        public height: number,
-        public data: string
-    ) {
-        this.hash = Block.calculateHash(prevHash, height, data);
-    }
-    static calculateHash(prevHash: string, height: number, data: string) {
-        const toHash = `${prevHash}${height}${data}`;
-        return crypto.createHash("sha256").update(toHash).digest("hex");
-    }
+interface PositionInterface {
+    x: number;
+    y: number;
 }
 
-class Blockchain {
-    private blocks: Block[];
-    constructor() {
-        this.blocks = [];
-    }
-    private getPrevHash() {
-        if (this.blocks.length === 0) return "";
-        return this.blocks[this.blocks.length - 1].hash;
-    }
-    public addBlock(data: string) {
-        const newBlock = new Block(this.getPrevHash(), this.blocks.length + 1, data);
-        this.blocks.push(newBlock);
-    }
-    public getBlocks() {
-        return this.blocks;
-    }
+const obj1: PositionType = {
+    x: 1,
+    y: 1
+}
+const obj2: PositionInterface = {
+    x: 1,
+    y: 1
 }
 
-const blockchain = new Blockchain();
+class Pos1 implements PositionType {
+    x: number = 1;
+    y: number = 1;
+}
 
-blockchain.addBlock("First one");
-blockchain.addBlock("Second one");
-blockchain.addBlock("Third one");
+class Pos2 implements PositionInterface {
+    x: number = 1;
+    y: number = 1;
+}
 
-console.log(blockchain.getBlocks());
+interface ZPositionInterface extends PositionInterface {
+    z: number;
+}
+
+type ZPositionType = PositionType & { z: number };
+
+//뭘써야할까
+//interface는 규격사항. API 는 계약서와 동일. 구현하는 사람들은 그 규약을 따름.
+//type은 이런 규격이라면 type보단 interface를 사용. 누군가 구현할 사람이 있다면 interface.
+
+//type은 data의 모습을 결정.
+//구현목적이 아닌 데이터를 담는 목적이라면 type을 사용.
