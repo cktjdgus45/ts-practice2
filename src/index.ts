@@ -1,13 +1,25 @@
-//Readonly
+//Partial TYPE
 
-//왠만한 타입은 이미 다만들어져있다. declare
-
-type Todo = {
+type ToDo = {
     title: string;
     description: string;
+    label: string;
+    priority: 'high' | 'low';
 }
 
-function display(todo: Readonly<Todo>) {
-    // todo.title = 1  //error
-    console.log(todo.title);
+function updateTodo(todo: ToDo, fieldsToUpdate: Partial<ToDo>): ToDo {
+    return {
+        ...todo, ...fieldsToUpdate
+    }
 }
+
+const todo: ToDo = {
+    title: 'learn js',
+    description: 'study hard',
+    label: 'study',
+    priority: 'high'
+}
+
+const updated = updateTodo(todo, { priority: 'low' });
+
+console.log(updated);
