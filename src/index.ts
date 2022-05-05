@@ -1,19 +1,32 @@
-import { type } from 'os';
+//mapped Type
+
+//[1,2].map(item=>item*item); // [1,4]
+
+type Video = {
+    title: string;
+    author: string;
+}
+
+type Optional<T> = {
+    [P in keyof T]?: T[P] // for... in
+}
+
+type ReadOnly<T> = {
+    readonly [P in keyof T]: T[P];
+}
+
+type VideoOptional = Optional<Video>;
+
+const videoOp: VideoOptional = {
+    title: 'autor',
+    author: 'author'
+}
 
 type Animal = {
     name: string;
     age: number;
-    gender: 'male' | 'female';
 }
 
-type Name = Animal['name']; //string
-
-const text: Name = 'name';
-
-type Gender = Animal['gender']; //'male'|'female'
-
-const gender: Gender = 'female';
-
-type Keys = keyof Animal; //'name' |'age' | 'gender'
-
-const keys: Keys = 'age';
+const animal: Optional<Animal> = {
+    name: 'dog'
+}
