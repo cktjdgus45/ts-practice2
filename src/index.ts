@@ -1,25 +1,13 @@
-//Partial TYPE
-
-type ToDo = {
+type Video = {
+    id: string;
     title: string;
-    description: string;
-    label: string;
-    priority: 'high' | 'low';
+    url: string;
+    data: string;
 }
 
-function updateTodo(todo: ToDo, fieldsToUpdate: Partial<ToDo>): ToDo {
+function getVideoMetaData(id: string): Pick<Video, 'id' | 'title'> {
     return {
-        ...todo, ...fieldsToUpdate
+        id: id,
+        title: 'title'
     }
 }
-
-const todo: ToDo = {
-    title: 'learn js',
-    description: 'study hard',
-    label: 'study',
-    priority: 'high'
-}
-
-const updated = updateTodo(todo, { priority: 'low' });
-
-console.log(updated);
