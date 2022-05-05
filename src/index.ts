@@ -1,12 +1,13 @@
-//Condition Type
+//Readonly
 
-type Check<T> = T extends string
-    ? string
-    : T extends number
-    ? 'number'
-    : T extends boolean
-    ? 'boolean'
-    : T extends Function
-    ? 'funcion'
-    : 'object';
-type Type = Check<string>; // boolean;
+//왠만한 타입은 이미 다만들어져있다. declare
+
+type Todo = {
+    title: string;
+    description: string;
+}
+
+function display(todo: Readonly<Todo>) {
+    // todo.title = 1  //error
+    console.log(todo.title);
+}
