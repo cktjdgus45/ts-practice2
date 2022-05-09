@@ -1,3 +1,4 @@
+import { VideoComponent } from './components/page/item/video.js';
 import { TodoComponent } from './components/page/item/todo.js';
 import { NoteComponent } from './components/page/item/note.js';
 import { ImageComponent } from './components/page/item/image.js';
@@ -15,6 +16,9 @@ class App {
 
         const todo = new TodoComponent('Todo Title', 'Todo item');
         todo.attachTo(appRoot, 'beforeend');
+
+        const video = new VideoComponent('Video Title', "https://www.youtube.com/embed/DPmX85Tj8fY");
+        video.attachTo(appRoot, 'beforeend');
     }
 }
 
