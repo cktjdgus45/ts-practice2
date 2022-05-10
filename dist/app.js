@@ -1,3 +1,4 @@
+import { InputDialog } from './components/dialog/dialog.js';
 import { VideoComponent } from './components/page/item/video.js';
 import { TodoComponent } from './components/page/item/todo.js';
 import { NoteComponent } from './components/page/item/note.js';
@@ -15,6 +16,17 @@ class App {
         this.page.addChild(todo);
         const video = new VideoComponent('Video Title', "https://www.youtube.com/embed/DPmX85Tj8fY");
         this.page.addChild(video);
+        const imageBtn = document.querySelector('#new-image');
+        imageBtn.addEventListener('click', () => {
+            const dialog = new InputDialog();
+            dialog.setOnCloseListener(() => {
+                dialog.removeFrom(document.body);
+            });
+            dialog.setOnSubmitListener(() => {
+                dialog.removeFrom(document.body);
+            });
+            dialog.attachTo(document.body);
+        });
     }
 }
 new App(document.querySelector('.document'));

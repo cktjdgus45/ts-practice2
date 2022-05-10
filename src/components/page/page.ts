@@ -8,9 +8,13 @@ interface SectionContainer extends Component, Composable {
     setOnCloseListener(listener: OnCloseListener): void;
 }
 
+type SectionsContainerConstructor = {
+    new(): SectionContainer;
+}
+
 type OnCloseListener = () => void;
 
-class PageItemComponent extends BaseComponent<HTMLElement> implements SectionContainer {
+export class PageItemComponent extends BaseComponent<HTMLElement> implements SectionContainer {
     private closeListener?: OnCloseListener;
     constructor() {
         super(`<li class="page-item">
